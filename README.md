@@ -11,7 +11,7 @@ Daniel Stadelmann,
 Marco Mattei, 
 Yannick Gerber
 
-# Project - vCenter Alert Management via PowerCLI
+## Project - vCenter Alert Management via PowerCLI
 
 **Use-Case:** Customers do monitor vSphere environment with solutions like out-of-the-box PRTG and lack sufficient alerting. They also don’t have Aria Operations in place.
 
