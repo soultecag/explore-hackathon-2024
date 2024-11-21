@@ -1,4 +1,4 @@
-# explore-hackathon-2024
+# VMware Explore 2024 Hackathon
 Team: onlyGPT - PowerCLI
 
 ![Team](https://blogs.vmware.com/code/files/2024/11/a-collage-of-men-wearing-black-shirts-description.png)
