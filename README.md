@@ -1,7 +1,7 @@
 # explore-hackathon-2024
 Team: onlyGPT - PowerCLI
 
-![Team](https://i.sstatic.net/Vp2cE.png)
+![Team](https://blogs.vmware.com/code/files/2024/11/a-collage-of-men-wearing-black-shirts-description.png)
 
 **Team Captain:** Dario Dörflinger
 
