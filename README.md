@@ -1,7 +1,7 @@
 # explore-hackathon-2024
 Team: onlyGPT - PowerCLI
 
-[![Team]([https://i.sstatic.net/Vp2cE.png]
+[Team]([https://i.sstatic.net/Vp2cE.png]
 
 **Team Captain:** Dario Dörflinger
 
