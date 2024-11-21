@@ -1,6 +1,8 @@
 # explore-hackathon-2024
 Team: onlyGPT - PowerCLI
 
+[![Team]([https://i.sstatic.net/Vp2cE.png]
+
 **Team Captain:** Dario Dörflinger
 
 **Team Members:**
@@ -17,4 +19,11 @@ Yannick Gerber
 
 
 **TL;DR:** define vCenter alerts based on a csv file, send (multiple) notifications based on severity
+
+# Hackathon Recap
+
+Checkout the Blog Article from Franky [here](https://blogs.vmware.com/code/2024/11/18/recap-code-hackathon-at-vmware-explore-barcelona-2024/)
+
+
+
 
