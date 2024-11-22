@@ -38,14 +38,16 @@ Version 1.00 - Martin Cooper 08/12/2018
 
 Version 1.1 - souITec@vmware explore hackathon 2024 -  5/11/2024
 
-    stuff
+    added functions to get current alarm definitions
+    Improved vCenter Access with SecureString
 
 #>
 
 # Load the PowerCLI SnapIn and set the configuration
 #Add-PSSnapin VMware.VimAutomation.Core -ea "SilentlyContinue"
-
 Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false | Out-Null
+
+
 function get-currentAlertDefinitions {
     param (
         $existingCSV
@@ -54,7 +56,7 @@ function get-currentAlertDefinitions {
     $tempCSV = "$PSScriptRoot\tempCSV.csv"
 
     # Clear the content (just in case)
-    #Clear-Variable -Name alarms
+    # Clear-Variable -Name alarms
 
     $alarms = Get-AlarmDefinition
     # Export the alarm definitions to a CSV file
@@ -137,8 +139,6 @@ $SMTPSendingAddress = "hackathon@explore.local"
 
 #Please DO NOT change anything below this line!
 
-#Import PowerCLI module
-#Import-Module -name VMware.PowerCLI
 
 #----These Alarms will be disabled and not send any email messages at all ----
 $DisabledAlarms = $Alarmfile | Where-Object priority -EQ "Disabled"
