@@ -1,43 +1,3 @@
-function get-currentAlertDefinitions {
-    param (
-        $existingCSV
-    )
-    # if this function is called, a new CSV will be created that reads out the default alerts
-    $tempCSV = "$PSScriptRoot\tempCSV.csv"
-
-    # Clear the content (just in case)
-    #Clear-Variable -Name alarms
-
-    $alarms = Get-AlarmDefinition
-    # Export the alarm definitions to a CSV file
-    $alarms | Select-Object Name, @{N="Description";E={$_.Description -replace "," -replace '"'}}, @{N="Priority";E={if (!$_.Enabled) {"Disabled"} else {""}}}, @{N="Notes";E={""}}, @{N="IfUsed";E={""}} | Export-Csv -Path $tempCSV -NoTypeInformation
-
-    # Import the existing CSV
-    $existingAlarms = Import-Csv -Path $existingCSV
-
-    # Import the temporary CSV
-    $tempAlarms = Import-Csv -Path $tempCSV
-
-    # Loop through the temporary alarms and update priorities from the existing CSV
-    foreach ($tempAlarm in $tempAlarms) {
-        $match = $existingAlarms | Where-Object { $_.Name -eq $tempAlarm.Name }
-        if ($match) {
-            # Update the priority if a match is found
-            if ($match.Priority -ne "") {
-                $tempAlarm.Priority = $match.Priority
-            }
-        }
-        else {
-            # Add a note if no match is found
-            $tempAlarm.Notes = "No match found in existing CSV"
-            $tempAlarm.Priority = "Disabled"
-        }
-    }
-    #$tempAlarms | ForEach-Object { $_ -replace '"', '' } | Export-Csv -Path $tempCSV -NoTypeInformation
-
-    # Export the updated alarms back to the temporary CSV
-    $tempAlarms | Export-Csv -Path $tempCSV -NoTypeInformation -UseQuotes Never
-}
 <#
 
 
@@ -84,7 +44,49 @@ Version 1.1 - souITec@vmware explore hackathon 2024 -  5/11/2024
 
 # Load the PowerCLI SnapIn and set the configuration
 #Add-PSSnapin VMware.VimAutomation.Core -ea "SilentlyContinue"
+
 Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false | Out-Null
+function get-currentAlertDefinitions {
+    param (
+        $existingCSV
+    )
+    # if this function is called, a new CSV will be created that reads out the default alerts
+    $tempCSV = "$PSScriptRoot\tempCSV.csv"
+
+    # Clear the content (just in case)
+    #Clear-Variable -Name alarms
+
+    $alarms = Get-AlarmDefinition
+    # Export the alarm definitions to a CSV file
+    $alarms | Select-Object Name, @{N="Description";E={$_.Description -replace "," -replace '"'}}, @{N="Priority";E={if (!$_.Enabled) {"Disabled"} else {""}}}, @{N="Notes";E={""}}, @{N="IfUsed";E={""}} | Export-Csv -Path $tempCSV -NoTypeInformation
+
+    # Import the existing CSV
+    $existingAlarms = Import-Csv -Path $existingCSV
+
+    # Import the temporary CSV
+    $tempAlarms = Import-Csv -Path $tempCSV
+
+    # Loop through the temporary alarms and update priorities from the existing CSV
+    foreach ($tempAlarm in $tempAlarms) {
+        $match = $existingAlarms | Where-Object { $_.Name -eq $tempAlarm.Name }
+        if ($match) {
+            # Update the priority if a match is found
+            if ($match.Priority -ne "") {
+                $tempAlarm.Priority = $match.Priority
+            }
+        }
+        else {
+            # Add a note if no match is found
+            $tempAlarm.Notes = "No match found in existing CSV"
+            $tempAlarm.Priority = "Disabled"
+        }
+    }
+    #$tempAlarms | ForEach-Object { $_ -replace '"', '' } | Export-Csv -Path $tempCSV -NoTypeInformation
+
+    # Export the updated alarms back to the temporary CSV
+    $tempAlarms | Export-Csv -Path $tempCSV -NoTypeInformation -UseQuotes Never
+}
+
 
 # Get the vCenter Server address, username and password as PSCredential
 $vCenterServer = Read-Host "Enter vCenter Server host name (DNS with FQDN or IP address)"
